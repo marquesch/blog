@@ -18,19 +18,30 @@ use App\Models\User;
 
 Route::get('/', function () {
     return view('posts', [
-        'posts' => Post::latest('published_at')->with(['author', 'category'])->get()
+        'posts' => Post::latest('published_at')->with(['author', 'category'])->get(),
+        'categories' => Category::all()
     ]);
 });
 
 Route::get('post/{post:slug}', function (Post $post) {
     // Find a post by its slug and pass it to a view called "post"
-    return view('post', ['post' => $post]);
+    return view('post', [
+        'post' => $post,
+        'categories' => Category::all()
+    ]);
 });
 
 Route::get('category/{category:slug}', function (Category $category) {
-    return view('posts', ['posts' => $category->posts->load(['category', 'author'])]);
+    return view('posts', [
+        'posts' => $category->posts->load(['category', 'author']),
+        'currentCategory' => $category,
+        'categories' => Category::all()
+    ]);
 });
 
 Route::get('author/{author:username}', function (User $author) {
-    return view('posts', ['posts' => $author->posts->load(['category', 'author'])]);
+    return view('posts', [
+        'posts' => $author->posts->load(['category', 'author']),
+        'categories' => Category::all()
+    ]);
 });

@@ -10,7 +10,9 @@ class Post extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    protected $dates = ['published_at'];
+    protected $casts = [
+        'published_at' => 'date'
+    ];
 
     public function category()
     {
