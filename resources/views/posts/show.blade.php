@@ -31,7 +31,7 @@
                         Published <time>{{ $post->published_at->diffForHumans() }}</time>
                     </p>
 
-                    <a href="/author/{{ $post->author->username}}">
+                    <a href="/?author={{ $post->author->username}}">
                         <div class="flex items-center lg:justify-center text-sm mt-4">
                             <img src="/img/lary-avatar.svg" alt="Lary avatar">
                             <div class="ml-3 text-left">
@@ -69,7 +69,7 @@
                     </h1>
 
                     <div class="space-y-4 lg:text-lg leading-loose">
-                        <p>{{ $post->body }}</p>
+                        <p>{!! $post->body !!}</p>
                     </div>
                 </div>
             </article>

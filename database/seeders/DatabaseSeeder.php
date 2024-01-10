@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
-
+use Database\Factories\CategoryFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,57 +16,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $userA = User::factory()->create();
-        $userB = User::factory()->create();
-        $userC = User::factory()->create();
+        $users = User::factory(30)->create();
 
-        $categoryA = Category::factory()->create();
-        $categoryB = Category::factory()->create();
-        $categoryC = Category::factory()->create();
+        $categories = Category::factory(30)->create();
 
-        Post::factory(5)->create([
-            "user_id"=> $userA->id,
-            "category_id"=> $categoryA->id,
-        ]);
-
-        Post::factory(5)->create([
-            "user_id"=> $userA->id,
-            "category_id"=> $categoryB->id,
-        ]);
-
-        Post::factory(5)->create([
-            "user_id"=> $userA->id,
-            "category_id"=> $categoryC->id,
-        ]);
-
-        Post::factory(5)->create([
-            "user_id"=> $userB->id,
-            "category_id"=> $categoryA->id,
-        ]);
-
-        Post::factory(5)->create([
-            "user_id"=> $userB->id,
-            "category_id"=> $categoryB->id,
-        ]);
-
-        Post::factory(5)->create([
-            "user_id"=> $userB->id,
-            "category_id"=> $categoryC->id,
-        ]);
-
-        Post::factory(5)->create([
-            "user_id"=> $userC->id,
-            "category_id"=> $categoryA->id,
-        ]);
-
-        Post::factory(5)->create([
-            "user_id"=> $userC->id,
-            "category_id"=> $categoryB->id,
-        ]);
-
-        Post::factory(5)->create([
-            "user_id"=> $userC->id,
-            "category_id"=> $categoryC->id,
-        ]);
+        for ($i = 0; $i <= 500; $i++) {
+            Post::factory()->create([
+                "user_id"=> $users[random_int(0, 29)]->id,
+                "category_id"=> $categories[random_int(0, 29)]->id
+            ]);
+        }
     }
 }

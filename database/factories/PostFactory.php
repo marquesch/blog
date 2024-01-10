@@ -18,14 +18,18 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $published_at = $this->faker->dateTimeThisYear();
+        
         return [
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
             'slug' => $this->faker->slug,
             'title' => $this->faker->sentence,
-            'excerpt' => $this->faker->sentence,
-            'body' => $this->faker->paragraph,
-            'published_at'=> $this->faker->date
+            'excerpt' => '<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
+            'body' => '<p>' . implode('</p><p>', $this->faker->paragraphs(10)) . '</p>',
+            'published_at' => $published_at,
+            'created_at' => $published_at,
+            'updated_at' => $published_at
         ];
     }
 }
